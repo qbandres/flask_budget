@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import mysql.connector
 import datetime
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -45,19 +46,14 @@ def main():
         table_data = cursor.fetchall()
 
         # Consulta para clasificar gastos por mes y clase
-        query = "SELECT DATE_FORMAT(DATE_EXE, '%M %Y') AS MesAno, CLASS, SUM(CANT) AS TOTAL FROM budget GROUP BY MesAno, CLASS LIMIT 10"
+        query = "SELECT DATE_FORMAT(DATE_EXE, '%Y-%m-01') AS MesAno, CLASS, SUM(CANT) AS TOTAL FROM budget GROUP BY MesAno, CLASS ORDER BY MesAno DESC LIMIT 10"
         cursor.execute(query)
         clasificacion_gastos = cursor.fetchall()
-        # Ordenar los resultados en Python por el campo 'Mes'
-        clasificacion_gastos = sorted(clasificacion_gastos, key=lambda x: x[0])
 
         # Consulta para clasificar gastos por mes y clase
-        query1 = "SELECT DATE_FORMAT(DATE_EXE, '%M %Y') AS MesAno,SUM(CANT) AS TOTAL FROM budget GROUP BY MesAno"
+        query1 = "SELECT DATE_FORMAT(DATE_EXE, '%Y %m-01') AS MesAno,SUM(CANT) AS TOTAL FROM budget GROUP BY MesAno DESC"
         cursor.execute(query1)
         clasificacion_gastos_mes = cursor.fetchall()
-        # Ordenar los resultados en Python por el campo 'Mes'
-        clasificacion_gastos_mes = sorted(clasificacion_gastos_mes, key=lambda x: x[0])
-        print(clasificacion_gastos_mes)
 
         cursor.close()
 
