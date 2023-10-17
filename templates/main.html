@@ -22,10 +22,31 @@
     </style>
 </head>
 <body>
-    <div>
-        <h2>Login</h2>
-        <a href="{{ url_for('agregar_gasto') }}" class="btn">Agregar Gasto</a>
-    </div>
+    <h2>Gastos Clasificados por Mes y Clase</h2>
+    <table class="bordered-table">
+        <thead>
+            <tr>
+                <th>Mes</th>
+                <th>Clase</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in clasificacion_gastos %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<div>
+    <h2>Información total</h2>
+    <a href="{{ url_for('agregar_gasto') }}" class="btn">Añadir nuevo movimiento</a>
+</div>
+<p></p>
     <table class="bordered-table">
         <thead>
             <tr>

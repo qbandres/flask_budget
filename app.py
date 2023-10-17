@@ -41,8 +41,15 @@ def main():
         cursor = db_connection.cursor()
         cursor.execute("SELECT * FROM budget")
         table_data = cursor.fetchall()
+
+        # Consulta para clasificar gastos por mes y clase
+        query = "SELECT MONTHNAME(DATE_EXE) AS Mes, CLASS, SUM(CANT) AS TOTAL FROM budget GROUP BY Mes, CLASS"
+        cursor.execute(query)
+        clasificacion_gastos = cursor.fetchall()
+
         cursor.close()
-        return render_template('main.html', table_data=table_data)
+
+        return render_template('main.html', table_data=table_data, clasificacion_gastos=clasificacion_gastos)
     else:
         return redirect(url_for('index'))
 
