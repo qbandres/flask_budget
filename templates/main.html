@@ -82,10 +82,24 @@
         <!-- Sección derecha -->
         <div class="right-container">
             <!-- Contenedor para el gráfico de pastel -->
-            <div class="pie-chart-container">
-                <h2>Gastos por Clasificación (Gráfico de Pastel)</h2>
-                <canvas id="pieChart"></canvas>
-            </div>
+            <h2>Gastos Totales por mes</h2>
+            <table class="bordered-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iteración sobre los datos de clasificación de gastos (en orden inverso) -->
+                    {% for row in clasificacion_gastos_mes|reverse %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
     <!-- Botón para agregar un nuevo gasto -->
@@ -128,4 +142,3 @@
         </tbody>
     </table>
     <script>
-        // Configuración y creación de un

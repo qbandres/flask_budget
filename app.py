@@ -51,9 +51,17 @@ def main():
         # Ordenar los resultados en Python por el campo 'Mes'
         clasificacion_gastos = sorted(clasificacion_gastos, key=lambda x: x[0])
 
+        # Consulta para clasificar gastos por mes y clase
+        query1 = "SELECT DATE_FORMAT(DATE_EXE, '%M %Y') AS MesAno,SUM(CANT) AS TOTAL FROM budget GROUP BY MesAno"
+        cursor.execute(query1)
+        clasificacion_gastos_mes = cursor.fetchall()
+        # Ordenar los resultados en Python por el campo 'Mes'
+        clasificacion_gastos_mes = sorted(clasificacion_gastos_mes, key=lambda x: x[0])
+        print(clasificacion_gastos_mes)
+
         cursor.close()
 
-        return render_template('main.html', table_data=table_data, clasificacion_gastos=clasificacion_gastos)
+        return render_template('main.html', table_data=table_data, clasificacion_gastos=clasificacion_gastos, clasificacion_gastos_mes=clasificacion_gastos_mes)
     else:
         return redirect(url_for('index'))
 
