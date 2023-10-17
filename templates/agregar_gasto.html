@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Gasto</title>
+</head>
+<body>
+    <div>
+        <h2>Agregar Gasto</h2>
+        <form method="POST" action="{{ url_for('procesar_gasto') }}">
+
+            <div>
+                <label for="nombre">Nombre:</label>
+                <select name="nombre" id="nombre" required>
+                    <option value="">Seleccionar</option> <!-- Opción vacía para comenzar -->
+                    <option value="yovana_perez">Yovana Perez</option>
+                    <option value="andres_quispe">Andres Quispe</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="descripcion">Descripción:</label>
+                <textarea name="descripcion" id="descripcion" rows="4" cols="50" required></textarea>
+            </div>
+            <div>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" step="0.01" required>
+            </div>
+            <div>
+                <label for="tipo">Tipo:</label>
+                <select name="tipo" id="tipo" required>
+                    <option value="">Seleccionar</option> <!-- Opción vacía para comenzar -->
+                    <option value="GASTO">GASTO</option>
+                    <option value="INGRESO">INGRESO</option>
+                </select>
+            </div>
+            <div>
+                <label for="clase">Clase:</label>
+                <select name="clase" id="clase" required>
+                    <option value="">Seleccionar</option> <!-- Opción vacía para comenzar -->
+                    <option value="colegio">colegio</option>
+                    <option value="extra_edu">extra_edu</option>
+                    <option value="restaurante">restaurante</option>
+                    <option value="gasolina">gasolina</option>
+                    <option value="cuota_fam">cuota_fam</option>
+                    <option value="cuota_mom">cuota_mom</option>
+                    <option value="cuota_dad">cuota_dad</option>
+                    <option value="ropa">ropa</option>
+                    <option value="tecnología">tecnología</option>
+                    <option value="regalos">regalos</option>
+                </select>
+            </div>
+            <div>
+                <label for="fecha">Fecha:</label>
+                <input type="date" name="fecha" id="fecha" required>
+            </div>
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+</body>
+</html>

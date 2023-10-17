@@ -1,1 +1,64 @@
-<h1>Hello world I will never stop learning</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Gastos</title>
+    <style>
+        .bordered-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .bordered-table th, .bordered-table td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .bordered-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Login</h2>
+        <a href="{{ url_for('agregar_gasto') }}" class="btn">Agregar Gasto</a>
+    </div>
+    <table class="bordered-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>DESCRIPTION</th>
+                <th>CANT</th>
+                <th>TIPO</th>
+                <th>CLASS</th>
+                <th>DATE_EXE</th>
+                <th>DATE_ENTER</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>
+                        <a href="{{ url_for('editar', id=row[0]) }}">Editar</a>
+                        <a href="{{ url_for('eliminar', id=row[0]) }}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
