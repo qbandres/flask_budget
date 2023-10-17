@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import mysql.connector
+import datetime
 
 app = Flask(__name__)
 
@@ -37,15 +38,18 @@ def login():
 @app.route('/main')
 def main():
     if 'username' in session:
+        
         # Consulta a la base de datos para obtener datos de la tabla "budget"
         cursor = db_connection.cursor()
-        cursor.execute("SELECT * FROM budget")
+        cursor.execute("SELECT * FROM budget ORDER BY DATE_EXE DESC")
         table_data = cursor.fetchall()
 
         # Consulta para clasificar gastos por mes y clase
-        query = "SELECT MONTHNAME(DATE_EXE) AS Mes, CLASS, SUM(CANT) AS TOTAL FROM budget GROUP BY Mes, CLASS"
+        query = "SELECT DATE_FORMAT(DATE_EXE, '%M %Y') AS MesAno, CLASS, SUM(CANT) AS TOTAL FROM budget GROUP BY MesAno, CLASS LIMIT 10"
         cursor.execute(query)
         clasificacion_gastos = cursor.fetchall()
+        # Ordenar los resultados en Python por el campo 'Mes'
+        clasificacion_gastos = sorted(clasificacion_gastos, key=lambda x: x[0])
 
         cursor.close()
 
