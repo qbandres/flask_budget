@@ -11,8 +11,8 @@ usuarios = {'andres':'41662431'}
 
 # Conexión a la base de datos MySQL
 db_connection = mysql.connector.connect(
-    host="localhost",
-    user="root",
+    host="budgetqb.cd884bvw7b8z.sa-east-1.rds.amazonaws.com",
+    user="qbandres",
     password="20011074",
     database="qbandres"
 )
@@ -52,7 +52,7 @@ def main():
         clasificacion_gastos = cursor.fetchall()
 
         # Consulta para clasificar gastos por mes y clase
-        query1 = "SELECT DATE_FORMAT(DATE_EXE, '%Y %m-01') AS MesAno,SUM(CANT) AS TOTAL FROM budget GROUP BY MesAno DESC"
+        query1 = "SELECT DATE_FORMAT(DATE_EXE, '%Y %m-01') AS MesAno,SUM(CANT) AS TOTAL FROM budget GROUP BY MesAno"
         cursor.execute(query1)
         clasificacion_gastos_mes = cursor.fetchall()
 
