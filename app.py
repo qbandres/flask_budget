@@ -5,7 +5,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 app.secret_key = 'Claudia13'
-usuarios = {'andres':'41662431'}
+usuarios = {'andres':'123','jorge':'456','favio':'789'}
 
 # Conexión a la base de datos MySQL
 db_connection = mysql.connector.connect(
